@@ -23,7 +23,7 @@ public class Student {
     @Email
     @Column(unique = true, length = 150)
     private String email;
-    @Column(length = 15)
+    @Column(name="phone_number",length = 15)
     private String phone;
     @Column(name = "home_address", columnDefinition = "text")
     private String address;

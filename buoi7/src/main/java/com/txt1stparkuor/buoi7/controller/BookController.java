@@ -6,6 +6,7 @@ import com.txt1stparkuor.buoi7.constant.UrlConstant;
 import com.txt1stparkuor.buoi7.dto.request.BookCreationRequest;
 import com.txt1stparkuor.buoi7.dto.request.BookUpdateRequest;
 import com.txt1stparkuor.buoi7.service.BookService;
+import jakarta.validation.Valid;
 import lombok.AccessLevel;
 import lombok.RequiredArgsConstructor;
 import lombok.experimental.FieldDefaults;
@@ -28,11 +29,12 @@ public class BookController {
         return  ResponseUtil.success(bookService.getBookById(id));
     }
     @PostMapping(UrlConstant.Book.CREATE_BOOK)
-    ResponseEntity<?> createBook(BookCreationRequest request) {
+    ResponseEntity<?> createBook(@RequestBody @Valid BookCreationRequest request) {
         return  ResponseUtil.success(HttpStatus.CREATED,bookService.createBook(request));
     }
     @PutMapping(UrlConstant.Book.UPDATE_BOOK)
-    ResponseEntity<?> updateBook(@PathVariable("id") Long id, BookUpdateRequest request) {
+    ResponseEntity<?> updateBook(@PathVariable("id") Long id,
+                                 @RequestBody @Valid BookUpdateRequest request) {
         return  ResponseUtil.success(bookService.updateBook(id, request));
     }
     @DeleteMapping(UrlConstant.Book.DELETE_BOOK)

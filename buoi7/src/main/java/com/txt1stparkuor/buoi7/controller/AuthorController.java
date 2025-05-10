@@ -6,6 +6,7 @@ import com.txt1stparkuor.buoi7.constant.UrlConstant;
 import com.txt1stparkuor.buoi7.dto.request.AuthorCreationRequest;
 import com.txt1stparkuor.buoi7.dto.request.AuthorUpdateRequest;
 import com.txt1stparkuor.buoi7.service.AuthorService;
+import jakarta.validation.Valid;
 import lombok.AccessLevel;
 import lombok.RequiredArgsConstructor;
 import lombok.experimental.FieldDefaults;
@@ -28,11 +29,12 @@ public class AuthorController {
         return  ResponseUtil.success(authorService.getAuthorById(id));
     }
     @PostMapping(UrlConstant.Author.CREATE_AUTHOR)
-    ResponseEntity<?> createAuthor(AuthorCreationRequest request) {
+    ResponseEntity<?> createAuthor(@RequestBody @Valid AuthorCreationRequest request) {
         return  ResponseUtil.success(HttpStatus.CREATED,authorService.createAuthor(request));
     }
     @PutMapping(UrlConstant.Author.UPDATE_AUTHOR)
-    ResponseEntity<?> updateAuthor(@PathVariable("id") Long id, AuthorUpdateRequest request) {
+    ResponseEntity<?> updateAuthor(@PathVariable("id") Long id,
+                                   @RequestBody @Valid AuthorUpdateRequest request) {
         return  ResponseUtil.success(authorService.updateAuthor(id, request));
     }
     @DeleteMapping(UrlConstant.Author.DELETE_AUTHOR)

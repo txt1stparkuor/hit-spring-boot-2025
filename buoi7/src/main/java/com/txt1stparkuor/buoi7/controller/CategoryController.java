@@ -6,6 +6,7 @@ import com.txt1stparkuor.buoi7.constant.UrlConstant;
 import com.txt1stparkuor.buoi7.dto.request.CategoryCreationRequest;
 import com.txt1stparkuor.buoi7.dto.request.CategoryUpdateRequest;
 import com.txt1stparkuor.buoi7.service.CategoryService;
+import jakarta.validation.Valid;
 import lombok.AccessLevel;
 import lombok.RequiredArgsConstructor;
 import lombok.experimental.FieldDefaults;
@@ -28,11 +29,12 @@ public class CategoryController {
         return  ResponseUtil.success(categoryService.getCategoryById(id));
     }
     @PostMapping(UrlConstant.Category.CREATE_CATEGORY)
-    ResponseEntity<?> createCategory(CategoryCreationRequest request) {
+    ResponseEntity<?> createCategory(@RequestBody @Valid CategoryCreationRequest request) {
         return  ResponseUtil.success(HttpStatus.CREATED,categoryService.createCategory(request));
     }
     @PutMapping(UrlConstant.Category.UPDATE_CATEGORY)
-    ResponseEntity<?> updateCategory(@PathVariable("id") Long id, CategoryUpdateRequest request) {
+    ResponseEntity<?> updateCategory(@PathVariable("id") Long id,
+                                     @RequestBody @Valid CategoryUpdateRequest request) {
         return  ResponseUtil.success(categoryService.updateCategory(id, request));
     }
     @DeleteMapping(UrlConstant.Category.DELETE_CATEGORY)
